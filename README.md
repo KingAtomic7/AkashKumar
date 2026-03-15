@@ -248,10 +248,9 @@ Built for educational malware analysis. Demonstrates keylogging techniques in co
 
 ## `> CONNECT`
 
-[![Email](https://img.shields.io/badge/EMAIL-akashkumar%40email.com-e74c3c?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0a0a0a)](mailto:akashkumar@email.com)
-[![LinkedIn](https://img.shields.io/badge/LINKEDIN-akashkumar-0077b5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=0a0a0a)](https://linkedin.com/in/akashkumar)
+[![Email](https://img.shields.io/badge/EMAIL-akashkumar%40email.com-e74c3c?style=for-the-badge&logo=gmail&logoColor=white&labelColor=0a0a0a)](mailto:akashck904@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LINKEDIN-akashkumar-0077b5?style=for-the-badge&logo=linkedin&logoColor=white&labelColor=0a0a0a)](https://linkedin.com/in/akashkumar002)
 [![GitHub](https://img.shields.io/badge/GITHUB-akashkumar-ffffff?style=for-the-badge&logo=github&logoColor=black&labelColor=0a0a0a)](https://github.com/akashkumar)
-[![Phone](https://img.shields.io/badge/PHONE-%2B91%208082946991-2ecc71?style=for-the-badge&logo=whatsapp&logoColor=white&labelColor=0a0a0a)](tel:+918082946991)
 
 <br/>
 
