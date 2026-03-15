@@ -159,13 +159,121 @@
     .about-grid,.contact-grid{grid-template-columns:1fr;}
     footer{flex-direction:column;text-align:center;}
   }
+
+  /* ========== MOTION GRAPHICS ========== */
+
+  /* Particle canvas overlay */
+  #particle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;}
+
+  /* Nav: slide-in from top */
+  nav{animation:nav-slide-in 0.7s cubic-bezier(.22,1,.36,1) both;}
+  @keyframes nav-slide-in{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+  /* Nav logo: flicker on load */
+  .nav-logo{animation:nav-slide-in 0.7s cubic-bezier(.22,1,.36,1) both, logo-flicker 0.6s 0.8s both;}
+  @keyframes logo-flicker{0%,100%{opacity:1}20%{opacity:0}40%{opacity:1}60%{opacity:0.4}80%{opacity:1}}
+
+  /* Scanline sweep on hero */
+  #hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(231,76,60,0.03) 50%,transparent 60%);pointer-events:none;animation:scanline 4s linear infinite;z-index:2;}
+  @keyframes scanline{0%{background-position:0 -100vh}100%{background-position:0 200vh}}
+
+  /* Hero grid: enhanced pulse */
+  .hero-grid-bg{animation:grid-shift 20s linear infinite, grid-fade 3s ease-in-out infinite alternate;}
+  @keyframes grid-fade{from{opacity:0.6}to{opacity:1}}
+
+  /* Corner glows: breathing pulse */
+  .corner-glow{animation:glow-breathe 4s ease-in-out infinite;}
+  .corner-glow.br{animation-delay:2s;}
+  @keyframes glow-breathe{0%,100%{opacity:0.08;transform:scale(1)}50%{opacity:0.18;transform:scale(1.2)}}
+
+  /* Hero name: electric shimmer */
+  .hero-name{background:linear-gradient(90deg,#fff 0%,#fff 45%,var(--red3) 50%,#fff 55%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fade-up 0.8s 0.5s forwards,text-shimmer 4s 2s linear infinite;}
+  .hero-name span{-webkit-text-fill-color:var(--red);color:var(--red);}
+  @keyframes text-shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+
+  /* Section titles: reveal with red underline draw */
+  .section-title{position:relative;display:inline-block;}
+  .section-title::after{content:'';position:absolute;bottom:-8px;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--red),transparent);transition:width 1.2s cubic-bezier(.22,1,.36,1);}
+  .section-title.visible::after{width:60%;}
+
+  /* Stat cards: counter animation handled via JS, card flip-in */
+  .stat-card{transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;animation:none;}
+  .stat-card.visible{animation:card-pop 0.5s cubic-bezier(.34,1.56,.64,1) both;}
+  @keyframes card-pop{from{opacity:0;transform:scale(0.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+  /* Skill cards: stagger fan-in */
+  .skill-card{opacity:0;transform:translateY(30px) rotateX(8deg);transition:opacity 0.6s,transform 0.6s,border-color 0.3s,box-shadow 0.3s;}
+  .skill-card.visible{opacity:1;transform:translateY(0) rotateX(0);}
+
+  /* Skill bar: glow fill */
+  .skill-bar-fill{box-shadow:0 0 8px var(--red3);transition:width 1.4s cubic-bezier(.17,.67,.3,.99);}
+
+  /* Project cards: slide-up with depth */
+  .project-card{opacity:0;transform:translateY(50px);transition:opacity 0.7s,transform 0.7s,border-color 0.3s,box-shadow 0.3s;}
+  .project-card.visible{opacity:1;transform:translateY(0);}
+  .project-card:hover .project-icon{animation:icon-wobble 0.5s ease;}
+  @keyframes icon-wobble{0%,100%{transform:rotate(0)}25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+
+  /* Project card: scanline on hover */
+  .project-card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(transparent,transparent 3px,rgba(231,76,60,0.025) 3px,rgba(231,76,60,0.025) 4px);opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:1;}
+  .project-card:hover::before{opacity:1;}
+
+  /* Timeline: line draw animation */
+  .timeline::before{animation:line-draw 1.5s ease forwards;height:0;}
+  .timeline.visible::before{height:calc(100% - 16px);}
+  @keyframes line-draw{from{height:0}to{height:calc(100% - 16px)}}
+
+  /* Timeline dots: pulse glow */
+  .timeline-item::before{animation:dot-pulse 2s ease-in-out infinite;}
+  @keyframes dot-pulse{0%,100%{box-shadow:0 0 8px var(--red)}50%{box-shadow:0 0 20px var(--red),0 0 40px rgba(231,76,60,0.3)}}
+
+  /* Timeline items: slide in from left */
+  .timeline-item{opacity:0;transform:translateX(-30px);transition:opacity 0.6s,transform 0.6s;}
+  .timeline-item.visible{opacity:1;transform:translateX(0);}
+
+  /* Cert cards: flip in */
+  .cert-card{opacity:0;transform:perspective(600px) rotateY(-20deg) translateX(-20px);transition:opacity 0.5s,transform 0.5s,border-color 0.3s;}
+  .cert-card.visible{opacity:1;transform:perspective(600px) rotateY(0deg) translateX(0);}
+
+  /* Contact links: slide right on reveal */
+  .contact-link{opacity:0;transform:translateX(-20px);transition:all 0.4s;}
+  .contact-link.visible{opacity:1;transform:translateX(0);}
+
+  /* Form inputs: focus glow */
+  .form-input:focus,.form-textarea:focus{box-shadow:0 0 0 2px rgba(231,76,60,0.2),0 0 16px rgba(231,76,60,0.08);}
+
+  /* Send button: pulse idle */
+  .form-btn{animation:btn-idle-pulse 3s ease-in-out infinite;}
+  @keyframes btn-idle-pulse{0%,100%{box-shadow:0 0 0 0 rgba(231,76,60,0.4)}50%{box-shadow:0 0 0 8px rgba(231,76,60,0)}}
+
+  /* Scroll indicator: bounce */
+  .hero-scroll{animation:fade-up 0.8s 1.4s forwards, scroll-bounce 2s 2.5s ease-in-out infinite;}
+  @keyframes scroll-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  /* Page transition: initial flash */
+  #page-flash{position:fixed;inset:0;background:var(--red);z-index:99999;pointer-events:none;animation:flash-out 0.7s cubic-bezier(.4,0,.2,1) forwards;}
+  @keyframes flash-out{0%{opacity:1;transform:scaleY(1)}80%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:top;}}
+
+  /* Section transitions: parallax hint */
+  section{transform:translateZ(0);}
+
+  /* Footer: fade in */
+  footer{opacity:0;animation:footer-fade 1s 0.5s forwards;}
+  @keyframes footer-fade{to{opacity:1}}
+
+  /* Noise texture overlay for depth */
+  #noise-overlay{position:fixed;inset:0;pointer-events:none;z-index:9997;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:noise-anim 0.15s steps(2) infinite;}
+  @keyframes noise-anim{0%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(1px,-1px)}75%{transform:translate(-1px,2px)}100%{transform:translate(2px,0)}}
 </style>
 </head>
 <body>
 
+<div id="page-flash"></div>
+<div id="noise-overlay"></div>
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 <canvas id="matrix-canvas"></canvas>
+<canvas id="particle-canvas"></canvas>
 
 <nav>
   <div class="nav-logo">AK://HACK</div>
@@ -381,7 +489,7 @@
       <div class="contact-info reveal">
         <p>I'm actively seeking <strong style="color:var(--red)">cybersecurity internships</strong>, open-source collaborations, and bug bounty partnerships. If you're looking for someone who thinks like an attacker to defend like a pro — let's talk.</p>
         <div class="contact-links">
-          <a href="mailto:akashck904@gmail.com" class="contact-link"><div class="contact-link-icon">📧</div><div><div style="font-size:11px;color:var(--dim);margin-bottom:2px">EMAIL</div>akashck904@gmail.com</div></a>
+          <a href="/cdn-cgi/l/email-protection#b1d0dad0c2d9d2da888185f1d6dcd0d8dd9fd2dedc" class="contact-link"><div class="contact-link-icon">📧</div><div><div style="font-size:11px;color:var(--dim);margin-bottom:2px">EMAIL</div><span class="__cf_email__" data-cfemail="3f5e545e4c575c54060f0b7f58525e5653115c5052">[email&#160;protected]</span></div></a>
           <a href="#" class="contact-link"><div class="contact-link-icon">💼</div><div><div style="font-size:11px;color:var(--dim);margin-bottom:2px">LINKEDIN</div>linkedin.com/in/akashkumar</div></a>
           <a href="#" class="contact-link"><div class="contact-link-icon">🐙</div><div><div style="font-size:11px;color:var(--dim);margin-bottom:2px">GITHUB</div>github.com/akashkumar</div></a>
           <a href="tel:+918082946991" class="contact-link"><div class="contact-link-icon">📱</div><div><div style="font-size:11px;color:var(--dim);margin-bottom:2px">PHONE</div>+91 8082946991</div></a>
@@ -403,7 +511,7 @@
   <div style="font-family:var(--mono);font-size:10px;color:#333">BUILT WITH ❤️ &amp; CAFFEINE</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // CURSOR
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
@@ -461,9 +569,174 @@ window.addEventListener('scroll',()=>{
 
 // SEND BTN
 document.getElementById('send-btn').addEventListener('click',function(){
-  this.textContent='MESSAGE SENT ✓';this.style.background='#2ecc71';
-  setTimeout(()=>{this.textContent='SEND MESSAGE →';this.style.background='';},2500);
+  this.textContent='MESSAGE SENT ✓';
+  this.style.background='#2ecc71';
+  setTimeout(()=>{this.textContent='SEND MESSAGE →';this.style.background='';},3000);
 });
+</script><script>
+// ========== MOTION GRAPHICS JS ==========
+
+// FLOATING PARTICLES
+(function(){
+  const pc = document.getElementById('particle-canvas');
+  const pctx = pc.getContext('2d');
+  function resizePC(){pc.width=window.innerWidth;pc.height=window.innerHeight;}
+  resizePC(); window.addEventListener('resize',resizePC);
+  const PARTICLE_COUNT = 60;
+  const particles = Array.from({length:PARTICLE_COUNT},()=>({
+    x: Math.random()*window.innerWidth,
+    y: Math.random()*window.innerHeight,
+    vx: (Math.random()-0.5)*0.4,
+    vy: (Math.random()-0.5)*0.4,
+    r: Math.random()*2+0.5,
+    alpha: Math.random()*0.5+0.1,
+    pulse: Math.random()*Math.PI*2
+  }));
+  let mouseX=window.innerWidth/2, mouseY=window.innerHeight/2;
+  document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;});
+  function drawParticles(){
+    pctx.clearRect(0,0,pc.width,pc.height);
+    particles.forEach(p=>{
+      p.pulse+=0.02;
+      p.x+=p.vx+(mouseX-pc.width/2)*0.00008;
+      p.y+=p.vy+(mouseY-pc.height/2)*0.00008;
+      if(p.x<0)p.x=pc.width; if(p.x>pc.width)p.x=0;
+      if(p.y<0)p.y=pc.height; if(p.y>pc.height)p.y=0;
+      const a = p.alpha*(0.7+0.3*Math.sin(p.pulse));
+      pctx.beginPath();
+      pctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      pctx.fillStyle='rgba(231,76,60,'+a+')';
+      pctx.fill();
+    });
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          pctx.beginPath();
+          pctx.strokeStyle='rgba(231,76,60,'+(0.15*(1-dist/120))+')';
+          pctx.lineWidth=0.5;
+          pctx.moveTo(particles[i].x,particles[i].y);
+          pctx.lineTo(particles[j].x,particles[j].y);
+          pctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+})();
+
+// ENHANCED INTERSECTION OBSERVER
+const motionObs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      const delay = (e.target.dataset.delay||0)*1 + i*60;
+      setTimeout(()=>e.target.classList.add('visible'), delay);
+    }
+  });
+},{threshold:0.1});
+
+document.querySelectorAll('.skill-card,.project-card,.cert-card,.timeline-item,.contact-link,.stat-card').forEach((el,i)=>{
+  el.dataset.delay = i*40;
+  motionObs.observe(el);
+});
+
+document.querySelectorAll('.section-title').forEach(el=>motionObs.observe(el));
+
+const timeline = document.querySelector('.timeline');
+if(timeline){
+  const tlObs = new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting) timeline.classList.add('visible');
+  },{threshold:0.1});
+  tlObs.observe(timeline);
+}
+
+// COUNTER ANIMATION
+function animateCounter(el, target, duration){
+  duration=duration||1400;
+  let start=null;
+  const suffix = el.dataset.suffix||'';
+  const step=ts=>{
+    if(!start)start=ts;
+    const progress=Math.min((ts-start)/duration,1);
+    const ease = 1-Math.pow(1-progress,3);
+    el.textContent = Math.floor(ease*target)+suffix;
+    if(progress<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+const counterObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && !e.target.dataset.animated){
+      e.target.dataset.animated='1';
+      const txt = e.target.textContent;
+      const val = parseInt(txt);
+      const suffix = txt.replace(/[0-9]/g,'');
+      e.target.dataset.suffix=suffix;
+      animateCounter(e.target,val);
+    }
+  });
+},{threshold:0.5});
+
+document.querySelectorAll('.stat-num').forEach(el=>counterObs.observe(el));
+
+// MAGNETIC BUTTONS
+document.querySelectorAll('.btn-primary,.btn-outline,.form-btn').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*0.25;
+    const y=(e.clientY-r.top-r.height/2)*0.25;
+    btn.style.transform='translateY(-2px) translate('+x+'px,'+y+'px)';
+  });
+  btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
+});
+
+// PARALLAX HERO
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+  const heroName=document.querySelector('.hero-name');
+  const heroDesc=document.querySelector('.hero-desc');
+  const gridBg=document.querySelector('.hero-grid-bg');
+  if(heroName)heroName.style.transform='translateY('+(sy*0.12)+'px)';
+  if(heroDesc)heroDesc.style.transform='translateY('+(sy*0.06)+'px)';
+  if(gridBg)gridBg.style.transform='translateY('+(sy*0.3)+'px)';
+},{ passive:true });
+
+// RIPPLE EFFECT
+const rStyle=document.createElement('style');
+rStyle.textContent='@keyframes ripple-anim{to{transform:scale(1);opacity:0}}';
+document.head.appendChild(rStyle);
+
+document.querySelectorAll('.project-card,.skill-card').forEach(card=>{
+  card.style.position='relative';
+  card.addEventListener('click',e=>{
+    const ripple=document.createElement('span');
+    const r=card.getBoundingClientRect();
+    const size=Math.max(r.width,r.height)*2;
+    ripple.style.cssText='position:absolute;width:'+size+'px;height:'+size+'px;left:'+(e.clientX-r.left-size/2)+'px;top:'+(e.clientY-r.top-size/2)+'px;background:rgba(231,76,60,0.15);border-radius:50%;transform:scale(0);animation:ripple-anim 0.6s ease-out forwards;pointer-events:none;z-index:10;';
+    card.appendChild(ripple);
+    setTimeout(()=>ripple.remove(),600);
+  });
+});
+
+// CURSOR TRAIL
+const trailCount = 8;
+const trails = Array.from({length:trailCount},function(_,i){
+  const t=document.createElement('div');
+  const sz=4+i*1.2;
+  const al=(0.4-(i*0.045)).toFixed(2);
+  const delay=(0.05+i*0.04).toFixed(2);
+  t.style.cssText='position:fixed;width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:rgba(231,76,60,'+al+');pointer-events:none;z-index:9990;transform:translate(-50%,-50%);transition:left '+delay+'s,top '+delay+'s;';
+  document.body.appendChild(t);
+  return t;
+});
+document.addEventListener('mousemove',e=>{
+  trails.forEach(t=>{t.style.left=e.clientX+'px';t.style.top=e.clientY+'px';});
+});
+
 </script>
 </body>
 </html>
